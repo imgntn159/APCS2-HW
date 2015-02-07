@@ -10,6 +10,9 @@ public class Recursion{
 		return facthelper(n, n-1);
 	}
 	public int facthelper(int a, int b){
+		if (a == 0){
+			return 1;
+		}
 		int c = a * b;
 		if (b == 1){
 			return c;
@@ -35,8 +38,8 @@ public class Recursion{
 		return sqrthelp(n, n/2);
 	}
 	public double sqrthelp(double a, double b){
-		if ((int) b == (int) (a/b+b)/2){
-			return (int) b;
+		if (.99*a <= b*b && 1.01*a >= b*b){
+			return b;
 		}
 		return sqrthelp(a, (a/b+b)/2);
 	}
