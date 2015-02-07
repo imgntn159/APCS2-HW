@@ -30,11 +30,14 @@ public class Recursion{
 		}
 		return fib(n-1) + fib(n-2);
 	}
-	public int fibhelper(int n){
-		return 3;
-	}
 	
 	public double sqrt(double n){
-		return 2;
+		return sqrthelp(n, n/2);
+	}
+	public double sqrthelp(double a, double b){
+		if ((int) b == (int) (a/b+b)/2){
+			return (int) b;
+		}
+		return sqrthelp(a, (a/b+b)/2);
 	}
 }
