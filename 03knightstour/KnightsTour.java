@@ -43,11 +43,11 @@ public class KnightsTour{
 
 
 	public void solve(){
-
+		return solve(1,1);
 	}
 
 	public void solve(int startx, int starty){
-
+		return solve(startx, starty, 1);
 	}
 
 
