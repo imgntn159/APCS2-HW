@@ -10,7 +10,7 @@ public class KnightsTour{
     final static String show =  "\033[?25h";
     
     //instance variable
-    private int[][]board = new int[1][1];
+    private int[][]board;
     
     //terminal specific character to move the cursor
     private String go(int x,int y){
@@ -27,21 +27,25 @@ public class KnightsTour{
     
     public String toString(){
         String ans = "\n";
-        for(int i=0;i<board.length;i++){
-            for(int q=0;i<board.length;q++){
-                ans += " ";
+        for(int i=0;i<5;i++){
+            for(int q=0;i<5;q++){
+		ans += " ";
                 ans += board[i][q];
-                ans += " ";
             }
             ans += "\n";
         }
-        return hide + clear + go(0,0) + ans + "\n" + show;
+        return clear + go(0,0) + ans + "\n" + show;
     }
     
     
     //Constructor
     public KnightsTour(int size){
         board = new int[size][size];
+	for (int q = 0;q<size;q++){
+	    for (int p = 0;p<size;p++){
+		board[p][q] = 0;
+	    }
+	}
     }
     
     
@@ -56,9 +60,9 @@ public class KnightsTour{
     
     
     public boolean solve(int x,int y,int currentMoveNumber){
-        System.out.println(this);
-        wait(20);
-        if (currentMoveNumber == (board.length-1) * (board.length-1)){
+        //System.out.println(this);
+        //wait(20);
+        if (currentMoveNumber == (board.length) * (board.length)){
             return true;
         }
         if (x < 0 || x > board.length - 1 ||
@@ -68,12 +72,13 @@ public class KnightsTour{
 	}
 	board[x][y] = currentMoveNumber;
 	if (solve(x+2,y+1,currentMoveNumber+1) ||
-	    solve(x+2,y+1,currentMoveNumber+1) ||
-	    solve(x+2,y+1,currentMoveNumber+1) ||
-	    solve(x+2,y+1,currentMoveNumber+1) ||
-	    solve(x+2,y+1,currentMoveNumber+1) ||
-	    solve(x+2,y+1,currentMoveNumber+1) ||
-	    solve(x+2,y+1,currentMoveNumber+1)){
+	    solve(x+2,y-1,currentMoveNumber+1) ||
+	    solve(x-2,y+1,currentMoveNumber+1) ||
+	    solve(x-2,y-2,currentMoveNumber+1) ||
+	    solve(x+1,y+2,currentMoveNumber+1) ||
+	    solve(x+1,y-2,currentMoveNumber+1) ||
+	    solve(x-1,y+2,currentMoveNumber+1) ||
+	    solve(x-1,y-2,currentMoveNumber+1)){
 	    return true;
 	}
 	board[x][y] = 0;
