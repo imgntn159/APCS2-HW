@@ -58,27 +58,27 @@ public class KnightsTour{
     public boolean solve(int x,int y,int currentMoveNumber){
         System.out.println(this);
         wait(20);
-        if (currentMoveNumber == board.length*board.length){
+        if (currentMoveNumber == (board.length-1) * (board.length-1)){
             return true;
         }
         if (x < 0 || x > board.length - 1 ||
             y < 0 || y > board.length - 1 ||
             board[x][y] != 0){
             return false;
+	}
+	board[x][y] = currentMoveNumber;
+	if (solve(x+2,y+1,currentMoveNumber+1) ||
+	    solve(x+2,y+1,currentMoveNumber+1) ||
+	    solve(x+2,y+1,currentMoveNumber+1) ||
+	    solve(x+2,y+1,currentMoveNumber+1) ||
+	    solve(x+2,y+1,currentMoveNumber+1) ||
+	    solve(x+2,y+1,currentMoveNumber+1) ||
+	    solve(x+2,y+1,currentMoveNumber+1)){
+	    return true;
+	}
+	board[x][y] = 0;
+	return false;
     }
-    board[x][y] = currentMoveNumber;
-    if (solve(x+2,y+1,currentMoveNumber+1) ||
-        solve(x+2,y+1,currentMoveNumber+1) ||
-        solve(x+2,y+1,currentMoveNumber+1) ||
-        solve(x+2,y+1,currentMoveNumber+1) ||
-        solve(x+2,y+1,currentMoveNumber+1) ||
-        solve(x+2,y+1,currentMoveNumber+1) ||
-        solve(x+2,y+1,currentMoveNumber+1)){
-        return true;
-}
-
-return false;
-}
 
 
 }
