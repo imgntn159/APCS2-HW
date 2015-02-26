@@ -29,11 +29,7 @@ public class NQueens{
         String ans = "\n";
         for(int i=0;i<board.length;i++){
             for(int q=0;q<board[0].length;q++){
-                if(board[i][q] / 10 == 0){
-                    ans += "  " + board[i][q];
-                }else{
-                    ans += " " + board[i][q];
-                }
+                ans += " " + board[i][q];
             }
             ans += "\n";
         }
@@ -44,35 +40,52 @@ public class NQueens{
     //Constructor
     public NQueens(int size){
         board = new int[size][size];
-        /*for (int q = 0;q<size;q++){
+        for (int q = 0;q<size;q++){
             for (int p = 0;p<size;p++){
                 board[p][q] = 0;
             }
-        }*/
+        }
     }
-
 
     public void solve(){
-        solve(0,0);
+        for (int q = 0;q<board.length;q++){
+            if (solve(q)){
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void solve(int startx, int starty){
-        solve(startx, starty, 1);
+    public void solve(int x){
+        for(int i = 0; i < board[0].length; i++){
+            if(solve(x,i,1)){
+                return true;
+            }
+        }
+        return false;
     }
-
-
 
     public boolean solve(int x,int y,int currentMoveNumber){
         //System.out.println(this);
         //wait(1);
-        if (currentMoveNumber == (board.length) * (board.length) + 1){
-            //System.out.println(this);
+        if (currentMoveNumber == board.length){
+            System.out.println(this);
             return true;
         }
         if (x < 0 || x > board.length - 1 ||
             y < 0 || y > board.length - 1 ||
             board[x][y] != 0){
             return false;
+        }
+        for (int q = x;q < board.length;q++){
+            if (board[q][y] != 0){
+                return false;
+            }
+        }
+        for (int q = y;q < board.length;q++){
+            if (board[x][q] != 0){
+                return false;
+            }
         }
         board[x][y] = currentMoveNumber;
         if (solve(x+2,y+1,currentMoveNumber+1) ||
