@@ -4,10 +4,10 @@ public class Driver{
 		try{
 	    	size = Integer.parseInt(args[0]);
 		}catch(Exception e){
-	    	size = 5;
+	    	size = 4;
 		}
-		KnightsTour a = new KnightsTour(size);
-		System.out.println(a.solve(0,0,1));
+		NQueens a = new NQueens(size);
+		System.out.println(a.solve());
 		System.out.println(a);
     }
 }
