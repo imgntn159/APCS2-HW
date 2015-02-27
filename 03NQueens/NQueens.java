@@ -39,7 +39,7 @@ public class NQueens{
 
     //Constructor
     public NQueens(int size){
-        board = new int[size][size];
+        board = new char[size][size];
         for (int q = 0;q<size;q++){
             for (int p = 0;p<size;p++){
                 board[p][q] = '.';
@@ -48,8 +48,8 @@ public class NQueens{
     }
 
     public boolean solve(){
-        for (int q = 0;q<board.length;q++){
-            if (solve(q)){
+        for(int i = 0; i < board.length; i++){
+            if(solve(i)){
                 return true;
             }
         }
@@ -58,39 +58,37 @@ public class NQueens{
 
     public boolean solve(int x){
         board[0][x] = 'Q';
+        boolean boo = false;
         for(int i = 0; i < board[0].length; i++){
-            if(solve(x,i)){
-                return true;
-            }
+            boo = boo || solve(1,i);
+        }
+        if(boo){
+            return true;
         }
         board[0][x] = '.';
         return false;
     }
 
-    public boolean solve(int x,int y){
-        //System.out.println(this);
-        //wait(1);
-        if (y == board.length){
-            System.out.println(this);
+    public boolean solve(int r, int c){
+        if(r == board.length){
             return true;
-        }
-        if (x < 0 || x > board.length - 1 ||
-            y < 0 || y > board.length - 1 ||
-            board[x][y] != 'Q'){
-            return false;
         }
         for(int i = 0; i < board.length; i++){
             for(int q = 0; q < board[0].length; q++){
-                if(/*something?*/){
+                if( !(r == i && r == q) && board[i][q] == 'Q' && ((Math.abs(r - i) == Math.abs(c - q)) || r == i || c == q) ){
                     return false;
                 }
             }
         }
-        board[x][y] = 'Q';
-        if (solve(x,y+1)){
+        board[r][c] = 'Q';
+        boolean bleh = false;
+        for(int i = 0; i < board[0].length; i++){
+            bleh = bleh || solve(r+1,i);
+        }
+        if(bleh){
             return true;
         }
-        board[x][y] = 0;
+        board[r][c] = '.';
         return false;
     }
 }

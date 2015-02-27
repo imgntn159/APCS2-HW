@@ -4,7 +4,7 @@ public class Driver{
 		try{
 	    	size = Integer.parseInt(args[0]);
 		}catch(Exception e){
-	    	size = 4;
+	    	size = 8;
 		}
 		NQueens a = new NQueens(size);
 		System.out.println(a.solve());
