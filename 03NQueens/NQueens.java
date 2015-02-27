@@ -10,7 +10,7 @@ public class NQueens{
     final static String show =  "\033[?25h";
     
     //instance variable
-    private int[][]board;
+    private char[][]board;
     
     //terminal specific character to move the cursor
     private String go(int x,int y){
@@ -42,7 +42,7 @@ public class NQueens{
         board = new int[size][size];
         for (int q = 0;q<size;q++){
             for (int p = 0;p<size;p++){
-                board[p][q] = 0;
+                board[p][q] = '.';
             }
         }
     }
@@ -57,24 +57,26 @@ public class NQueens{
     }
 
     public boolean solve(int x){
+        board[0][x] = 'Q';
         for(int i = 0; i < board[0].length; i++){
-            if(solve(x,i,1)){
+            if(solve(x,i)){
                 return true;
             }
         }
+        board[0][x] = '.';
         return false;
     }
 
-    public boolean solve(int x,int y,int currentMoveNumber){
+    public boolean solve(int x,int y){
         //System.out.println(this);
         //wait(1);
-        if (currentMoveNumber == board.length){
+        if (y == board.length){
             System.out.println(this);
             return true;
         }
         if (x < 0 || x > board.length - 1 ||
             y < 0 || y > board.length - 1 ||
-            board[x][y] != 0){
+            board[x][y] != 'Q'){
             return false;
         }
         for(int i = 0; i < board.length; i++){
@@ -84,8 +86,8 @@ public class NQueens{
                 }
             }
         }
-        board[x][y] = currentMoveNumber;
-        if (solve(x,y+1,currentMoveNumber+1)){
+        board[x][y] = 'Q';
+        if (solve(x,y+1)){
             return true;
         }
         board[x][y] = 0;
