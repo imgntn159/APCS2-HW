@@ -1,4 +1,4 @@
-public class usacoDriver{
+public class silver{
     public static void main(String[]args){
         int[][] thingy = new int[][]{
             { 28, 25, 20, 32, 34, 36 },

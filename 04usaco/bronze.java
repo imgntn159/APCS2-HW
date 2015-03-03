@@ -1,7 +1,7 @@
-public class usaco{
+public class bronze{
     private int[][] land = new int[3][3];
     private int depth = 0;
-    public usaco(int[][] l, int d){
+    public bronze(int[][] l, int d){
         land = l;
         depth = d;
     }
@@ -17,7 +17,7 @@ public class usaco{
                 }
             }
         }
-        int checker = biggest - depth;
+        int checker = biggest - d;
         for (int q = -1;q < 2;q++){
             for (int p = -1;p < 2;p++){
                 if (land[r+q][c+p] >= checker){
@@ -38,6 +38,25 @@ public class usaco{
         }
         System.out.println(totald);
         return totald * 72 * 72;
+    }
+
+
+    /*Driver*/
+    public static void main(String[]args){
+        int[][] thingy = new int[][]{
+            { 28, 25, 20, 32, 34, 36 },
+            { 27, 25, 20, 20, 30, 34 },
+            { 24, 20, 20, 20, 20, 30 },
+            { 20, 20, 14, 14, 20, 20 }
+        };
+        //row 1:  28 25 20 32 34 36
+        //row 2:  27 25 20 20 30 34
+        //row 3:  24 20 20 20 20 30
+        //row 4:  20 20 14 14 20 20
+        bronze a = new bronze(thingy, 22);
+        a.instruction(1, 4, 4);
+        a.instruction(1, 1, 10);
+        System.out.println(a.calculate());
     }
  
 }
