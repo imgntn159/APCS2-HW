@@ -38,7 +38,7 @@ public class mergesort{
     public static void mergeSort(int[] a){
 		int[] b = mergeS(a);
 		for(int i = 0; i < a.length; i++){
-		    a[i] = b[i];
+		    a[a.length - 1 - i] = b[i];
 		}
     }
 
