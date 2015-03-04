@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class mergesort{
 	public static int[] merge(int[] a, int[] b){
 		int[] result = new int[a.length + b.length];
@@ -19,30 +21,22 @@ public class mergesort{
 
     	if (a[aCount] > b[bCount]){
     		end[endCount] = a[aCount];
-    		return mergeHelp(a,b,aCount+1,bCount,endCount+1,end;)
-    	} else if (a[aCount] > b[bCount]){
+    		return mergeHelp(a,b,aCount+1,bCount,endCount+1,end);
+    	} else{
     		end[endCount] = b[bCount];
-    		return mergeHelp(a,b,aCount,bCount+1,endCount+1,end;)
+    		return mergeHelp(a,b,aCount,bCount+1,endCount+1,end);
     	}
     }
 
-    public static int[] mergeSort(int[] array){
+    public static int[] mergeS(int[] array){
     	if (array.length <= 1){
     		return array;
     	}
-    	int[] a = new int[array.length / 2];
-		int[] b = new int[array.length - (array.length / 2)];
-		for(int i = 0; i < a.length; i++){
-	    	a[i] = array[i];
-		}
-		for(int i = a.length - 1; i < array.length; i++){
-	    	b[i - a.length / 2] = array[i];
-		}
-		return merge(mergeSort(a),mergeSort(b));
+    	return merge(mergeS(Arrays.copyOfRange(array,0,array.length / 2)), mergeS(Arrays.copyOfRange(array,array.length / 2, array.length)));
     }
 
     public static void mergeSort(int[] a){
-		int[] b = mergeSort(a);
+		int[] b = mergeS(a);
 		for(int i = 0; i < a.length; i++){
 		    a[i] = b[i];
 		}
@@ -50,7 +44,14 @@ public class mergesort{
 
     /*Driver*/
     public static void main(String[]args){
-    	System.out.println("HI");
-    	//put stuff here
+    	int[] a = new int[]{1,2,3,4,5,6};
+    	int[] b = new int[]{6,5,4,3,2,1};
+    	int[] c = new int[]{3,4,2,1,6,5};
+    	mergeSort(a);
+    	System.out.println(Arrays.toString(a));
+    	mergeSort(b);
+    	System.out.println(Arrays.toString(b));
+    	mergeSort(c);
+    	System.out.println(Arrays.toString(c));
     }
 }
