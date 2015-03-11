@@ -1,18 +1,18 @@
-public class LNode implements List{
+public class LNode{
 	private int value;
 	private LNode next;
 
 	public int getVal(){
 		return value;
 	}
-	public int setVal(int x){
+	public void setVal(int x){
 		value = x;
 	}
 	
 	public LNode getNext(){
 		return next;
 	}
-	public int setNext(LNode thing){
+	public void setNext(LNode thing){
 		next = thing;
 	}
 	public String toString(){
