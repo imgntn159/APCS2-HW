@@ -2,6 +2,14 @@ public class LNode{
 	private int value;
 	private LNode next;
 
+	public LNode(int val){
+		setVal(val);
+	}
+	public LNode(int val,LNode thingy){
+		setVal(val);
+		setNext(thingy);
+	}
+
 	public int getVal(){
 		return value;
 	}
