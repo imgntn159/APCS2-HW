@@ -1,13 +1,13 @@
 import java.util.*;
 public class MyLinkedList<T>{
-	private LNode head;
+	private LNode<T> head;
 	private int size;
 
 	public String name(){
-	    return "castanos.kaizen";
+		return "castanos.kaizen";
 	}
 
-	public LNode getHead(){
+	public LNode<T> getHead(){
 		return head;
 	}
 
@@ -16,16 +16,16 @@ public class MyLinkedList<T>{
 			return "[ ]";
 		}
 		String ans = "[";
-		LNode temp = head;
+		LNode<T> temp = head;
 		while(temp.getNext() != null){
-			ans += "" + temp.getVal() + ",";
+			ans += "" + temp.getData() + ",";
 			temp = temp.getNext();
 		}
-		ans += "" + temp.getVal() + "]";
+		ans += "" + temp.getData() + "]";
 		return ans;
 	}
 
-	public void add(T n){
+	public void add(T n){//Adds to end
 		if (size() == 0){
 			head = new LNode<T>(n);
 		}else{
@@ -52,20 +52,20 @@ public class MyLinkedList<T>{
 		}
 	}
 
-	public int get(int index){
-		LNode temp = head;
+	public T get(int index){
+		LNode<T> temp = head;
 		for (int i = 0;i < index;i++){
 			try{
 				temp = temp.getNext();
 			}catch(IndexOutOfBoundsException e){
 				System.out.println("You suck, pick a better index");
-				return 0;
+				return null;
 			}
 		}
-		return temp.getVal();
+		return temp.getData();
 	}
-	public void set(int index, int value){
-		LNode temp = head;
+	public void set(int index, T value){
+		LNode<T> temp = head;
 		for (int i = 0; i < index; i++){
 			try{
 				temp = temp.getNext();
@@ -74,13 +74,13 @@ public class MyLinkedList<T>{
 				return;
 			}
 		}
-		temp.setVal(value);
+		temp.setData(value);
 	}
-	public int indexOf(int value){
+	public int indexOf(T value){
 		int n = 0;
-		LNode temp = head;
+		LNode<T> temp = head;
 		for (int i = 0; i < size(); i++){
-			if(temp.getVal() == value){
+			if(temp.getData() == value){
 				return n;
 			}
 			temp = temp.getNext();
@@ -88,17 +88,42 @@ public class MyLinkedList<T>{
 		}
 		return -1;
 	}
+	public boolean remove(int index){
+		if(index == 0){
+			head = head.getNext();
+		}else{
+			int n = 0;
+			LNode<T> temp = head;
+			for (int i = 0; i < index - 1; i++) {
+				head = head.getNext();
+			}
+			try{
+				temp.setNext(temp.getNext().getNext());
+			}catch(NullPointerException e){
+				temp.setNext(null);
+			}
+		}
+		size--;
+		return true;
+	}
 
 	public int size(){
 		return size;
 	}
 
 	public static void main(String[] args){
-		MyLinkedList l = new MyLinkedList();
+		MyLinkedList<Integer> l = new MyLinkedList<Integer>();
 		l.add(1);
 		l.add(2);
 		System.out.println(l);
-		l.add(1,3);
+		l.remove(1);
 		System.out.println(l);
+		System.out.println("/****/");
+		/*MyLinkedList<String> s = new MyLinkedList<String>();
+		s.add("a");
+		s.add("b");
+		System.out.println(s);
+		s.add(1,"c");
+		System.out.println(s);*/
 	}
 }
