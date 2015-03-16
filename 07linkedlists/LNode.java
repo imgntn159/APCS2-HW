@@ -1,19 +1,23 @@
-public class LNode{
-	private int value;
+public class LNode<T>{
+	private T value;
 	private LNode next;
 
-	public LNode(int val){
-		setVal(val);
+	public String name(){
+	    return "Castanos.Kaizen";
 	}
-	public LNode(int val,LNode thingy){
-		setVal(val);
+
+	public LNode(T val){
+		setData(val);
+	}
+	public LNode(T val,LNode thingy){
+		setData(val);
 		setNext(thingy);
 	}
 
-	public int getVal(){
+	public T getData(){
 		return value;
 	}
-	public void setVal(int x){
+	public void setData(T x){
 		value = x;
 	}
 	

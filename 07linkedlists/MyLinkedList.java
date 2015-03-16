@@ -1,7 +1,11 @@
 import java.util.*;
-public class MyLinkedList{
+public class MyLinkedList<T>{
 	private LNode head;
 	private int size;
+
+	public String name(){
+	    return "castanos.kaizen";
+	}
 
 	public LNode getHead(){
 		return head;
@@ -21,28 +25,28 @@ public class MyLinkedList{
 		return ans;
 	}
 
-	public void add(int n){
+	public void add(T n){
 		if (size() == 0){
-			head = new LNode(n);
+			head = new LNode<T>(n);
 		}else{
-			LNode temp = head;
+			LNode<T> temp = head;
 			for (int i = 0; i < size() - 1; i++){
 				temp = temp.getNext();
 			}
-			temp.setNext(new LNode(n));
+			temp.setNext(new LNode<T>(n));
 		}
 		size++;
 	}
-	public void add(int index, int value){
+	public void add(int index, T value){
 		if(index == 0){
-			LNode bleh = new LNode(value,head);
+			LNode<T> bleh = new LNode<T>(value,head);
 			head = bleh;
 		}else{
-			LNode temp = head;
+			LNode<T> temp = head;
 			for (int i = 0; i < index - 1; i++){
 				temp = temp.getNext();
 			}
-			LNode blarg = new LNode(value,temp.getNext());
+			LNode<T> blarg = new LNode<T>(value,temp.getNext());
 			temp.setNext(blarg);
 			size++;
 		}
