@@ -33,6 +33,9 @@ public class MyLinkedList<T> implements Iterable<T>{
 	public LNode<T> getHead(){
 		return head;
 	}
+	public void setHead(LNode<T> node){
+		head = node;
+	}
 	public LNode<T> getTail(){
 		return tail;
 	}
@@ -62,7 +65,7 @@ public class MyLinkedList<T> implements Iterable<T>{
 		size++;
 	}
 	public void addF(T n){//Adds to front
-		temp = new LNode<T>(n);
+		LNode<T> temp = new LNode<T>(n);
 		temp.setNext(head);
 		head = temp;
 		size++;
