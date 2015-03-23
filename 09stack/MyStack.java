@@ -17,4 +17,13 @@ public class MyStack<T>{
     top = temp;
     return item;
   }
+
+  public static void main(String[]args){
+    MyStack<Integer> S = new MyStack<Integer>();
+    S.push(1);
+    S.push(4);
+    System.out.println(S.peek()); //4
+    System.out.println(S.pop());  //4
+    System.out.println(S.peek()); //1
+  }
 }
