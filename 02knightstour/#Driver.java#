@@ -1,0 +1,10 @@
+public class Driver{
+    public static void main(String[]args){
+	if (args.length > 0){
+	    a = new KnightsTour(args[0]);
+	} else {
+	    KnightsTour a = new KnightsTour(5);
+	}
+        System.out.println(a.solve(0,0,1));
+    }
+}

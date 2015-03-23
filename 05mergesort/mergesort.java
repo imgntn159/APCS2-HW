@@ -44,14 +44,14 @@ public class mergesort{
 
     /*Driver*/
     public static void main(String[]args){
-    	int[] a = new int[]{1,2,3,4,5,6};
-    	int[] b = new int[]{6,5,4,3,2,1};
-    	int[] c = new int[]{3,4,2,1,6,5};
-    	mergeSort(a);
-    	System.out.println(Arrays.toString(a));
-    	mergeSort(b);
-    	System.out.println(Arrays.toString(b));
-    	mergeSort(c);
-    	System.out.println(Arrays.toString(c));
+    	try{
+	    int[] a = new int[Integer.toInteger(args[0])];
+	    long s = System.currentTimeMillis();
+	    mergeSort(a);
+	    long e = System.currentTimeMillis();
+	    System.out.println("That was " + (s-e) + " milliseconds");
+	}catch (Exception e){
+	    System.out.println("Put in a number =P");
+	}
     }
 }
