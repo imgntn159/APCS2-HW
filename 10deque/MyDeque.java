@@ -13,11 +13,27 @@ public class MyDeque<T> {
   }
 
   public void resize(){
-    return;
+    if(size == list.length){
+      T[] newlist = (T[]) new Object[size * 2];
+      for(int i = 0; i < size; i++){
+        newlist[i] = list[(head + i) % size];
+      }
+      list = newlist;
+      head = 0;
+      tail = size - 1;
+    }/*else if(size <= list.length/4){
+      T[] newlist = (T[]) new Object[size/2];
+      for(int i = 0; i < size; i++){
+        newlist[i] = list[(head + i) % size];
+      }
+      list = newlist;
+      head = 0;
+      tail = size - 1;
+    }*/
   }
 
   public void addFirst(T item){
-    //resize();
+    resize();
     head--;
     if(head < 0){
       head += list.length;
@@ -26,7 +42,7 @@ public class MyDeque<T> {
     size += 1;
   }
   public void addLast(T item){
-    //resize();
+    resize();
     tail++;
     if(tail != 0 && tail >= list.length){
       tail -= list.length;
@@ -62,8 +78,9 @@ public class MyDeque<T> {
 
   public static void main(String[]args){
     MyDeque<Integer> D = new MyDeque<Integer>();
-    D.addFirst(1);
-    D.addLast(2);
-    System.out.println(D.getFirst());
+    for (int i = 0;i < 25;i++){
+      D.addFirst(i);
+    }
+    System.out.println(D.size());
   }
 }
