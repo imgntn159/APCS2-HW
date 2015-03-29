@@ -54,11 +54,21 @@ public class MyDeque<T> {
   public T removeFirst(){
     T val = list[head];
     list[head] = null;
+    head++;
+    if(head != 0 && head >= list.length){
+      head -= list.length;
+    }
+    size -= 1;
     return val;
   }
   public T removeLast(){
     T val = list[tail];
     list[tail] = null;
+    tail--;
+    if(tail < 0){
+      tail += list.length;
+    }
+    size -= 1;
     return val;
   }
 
@@ -86,7 +96,8 @@ public class MyDeque<T> {
       D.addFirst(i);
     }
     System.out.println(D.size());
-    System.out.println(D.removeFirst());
     System.out.println(D.removeLast());
+    System.out.println(D.removeLast());
+    System.out.println(D.size());
   }
 }
