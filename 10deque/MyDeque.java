@@ -51,11 +51,15 @@ public class MyDeque<T> {
     size += 1;
   }
 
-  public void removeFirst(T item){
-    return;
+  public T removeFirst(){
+    T val = list[head];
+    list[head] = null;
+    return val;
   }
-  public void removeLast(T item){
-    return;
+  public T removeLast(){
+    T val = list[tail];
+    list[tail] = null;
+    return val;
   }
 
   public T getFirst(){
@@ -78,9 +82,11 @@ public class MyDeque<T> {
 
   public static void main(String[]args){
     MyDeque<Integer> D = new MyDeque<Integer>();
-    for (int i = 0;i < 25;i++){
+    for (int i = 1;i < 26;i++){
       D.addFirst(i);
     }
     System.out.println(D.size());
+    System.out.println(D.removeFirst());
+    System.out.println(D.removeLast());
   }
 }
