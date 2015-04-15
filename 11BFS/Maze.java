@@ -4,6 +4,7 @@ public class Maze{
     private static final String clear =  "\033[2J";
     private static final String hide =  "\033[?25l";
     private static final String show =  "\033[?25h";
+    private static final String invert =  "\033[37";
 
     private Frontier front;
     private boolean behave;
@@ -70,7 +71,7 @@ public class Maze{
 		}
 		ans += maze[i%maxx][i/maxx];
 	    }
-	    return hide+invert()+go(0,0)+ans+"\n"+show();
+	    return hide+invert+go(0,0)+ans+"\n"+show;
 	}else{
 	    return toString();
 	}
@@ -98,5 +99,37 @@ public class Maze{
     public boolean solveDFS(){
 	return solveDFS(false);
     }
+    /*private boolean solve(boolean animate, boolean mode){
+	    Frontier rest = new Frontier(mode);
+	    Point start = new Point(startx,starty);//startx and starty are instance variables in my maze class
+
+	    rest.add(start);//put the start into the Frontier 
+		
+	    boolean solved = false;
+	    while(!solved && rest.hasNext()){
+		if(animate && !solved){
+		    System.out.println(toString(true));
+		}
+		    //get the top
+		Point next = rest.remove();
+		    //check if solved
+		if(maze[next.getX()][next.getY()]=='E'){
+			//solved!
+		    solved = true;
+		    addCoordinatesToSolutionArray(next);
+
+			//my point class has a reference to previous points, so the solution will be determined from the final point
+
+		}else{
+			//not solved, so add neighbors to Frontier and mark the floor with x.
+		    maze[next.getX()][next.getY()]='x';
+		    for(Point p : getNeighbors(next)){
+			rest.add(p);
+		    }
+
+		}
+	    }
+	    return solved;
+	    }*/
 }
 
