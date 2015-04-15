@@ -4,10 +4,10 @@ public class Frontier{
 
     public class DeqIterator implements Iterator{
 	public boolean hasNext(){
-	    asdf;
+	    return list.size() > 0;
 	}
 	public int next(){
-	    asdf;
+	    return 3;
 	}
 	public void remove(){
 	    throw new UnsupportedOperationException();

@@ -99,7 +99,7 @@ public class Maze{
     public boolean solveDFS(){
 	return solveDFS(false);
     }
-    /*private boolean solve(boolean animate, boolean mode){
+    private boolean solve(boolean animate, boolean mode){
 	    Frontier rest = new Frontier(mode);
 	    Point start = new Point(startx,starty);//startx and starty are instance variables in my maze class
 
@@ -130,6 +130,6 @@ public class Maze{
 		}
 	    }
 	    return solved;
-	    }*/
+	}
 }
 
