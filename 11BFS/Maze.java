@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class Maze{
     private static final String clear =  "\033[2J";
@@ -82,7 +83,7 @@ public class Maze{
      * Replace spaces with x's as you traverse the maze. 
      */
     public boolean solveBFS(boolean animate){
-	asdf;
+	return solve1(animate,true);
     }
 
     /**Solve the maze using a frontier in a DFS manner. 
@@ -90,7 +91,7 @@ public class Maze{
      * Replace spaces with x's as you traverse the maze. 
      */
     public boolean solveDFS(boolean animate){
-	
+	return solve1(animate,true);	
     }
 
     public boolean solveBFS(){
@@ -123,7 +124,7 @@ public class Maze{
         
     }
     
-    private boolean solve(boolean animate, boolean mode){
+    private boolean solve1(boolean animate, boolean mode){
 	    Frontier rest = new Frontier(mode); //true then q
 	    Point start = new Point(startx,starty);
 

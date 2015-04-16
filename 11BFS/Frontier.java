@@ -1,8 +1,8 @@
 public class Frontier{
-    MyDeque<Integer> list = new MyDeque<Integer>();
+    MyDeque<Point> list = new MyDeque<Point>();
     private boolean behavior;// if true, then q
 
-    public class DeqIterator implements Iterator{
+    /*public class DeqIterator implements Iterator{
 	public boolean hasNext(){
 	    return list.size() > 0;
 	}
@@ -12,19 +12,23 @@ public class Frontier{
 	public void remove(){
 	    throw new UnsupportedOperationException();
 	}
+	}*/
+
+    public boolean hasNext(){
+	return list.size() > 0;
     }
 
     public Frontier(boolean behavior){
 	this.behavior = behavior;
     }
-    public void add(int item){
+    public void add(Point item){
 	list.addFirst(item);
     }
-    public void remove(){
+    public Point remove(){
 	if(behavior){
-	    list.removeLast();
+	    return list.removeLast();
 	}else{
-	    list.removeFirst();
+	    return list.removeFirst();
 	}
     }
 }
