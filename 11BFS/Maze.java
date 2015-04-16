@@ -99,9 +99,33 @@ public class Maze{
     public boolean solveDFS(){
 	return solveDFS(false);
     }
+    
+    public Point[] getNeighbors(Point p){
+        Point[] result = new Point[4];
+        int pos = 0;
+        if (!(maze[p.getX()+1][p.getY()] == '.' || maze[p.getX()+1][p.getY()] == '#')){
+            result[pos] = new Point(p.getX()+1,p.getY());
+            pos++;
+        }
+        if (!(maze[p.getX()-1][p.getY()] == '.' || maze[p.getX()-1][p.getY()] == '#')){
+            result[pos] = new Point(p.getX()-1,p.getY());
+            pos++;
+        }
+        if (!(maze[p.getX()][p.getY()+1] == '.' || maze[p.getX()][p.getY()+1] == '#')){
+            result[pos] = new Point(p.getX(),p.getY()+1);
+            pos++;
+        }
+        if (!(maze[p.getX()][p.getY()-1] == '.' || maze[p.getX()][p.getY()-1] == '#')){
+            result[pos] = new Point(p.getX(),p.getY()-1);
+            pos++;
+        }
+        return result;
+        
+    }
+    
     private boolean solve(boolean animate, boolean mode){
-	    Frontier rest = new Frontier(mode);
-	    Point start = new Point(startx,starty);//startx and starty are instance variables in my maze class
+	    Frontier rest = new Frontier(mode); //true then q
+	    Point start = new Point(startx,starty);
 
 	    rest.add(start);//put the start into the Frontier 
 		
@@ -116,7 +140,7 @@ public class Maze{
 		if(maze[next.getX()][next.getY()]=='E'){
 			//solved!
 		    solved = true;
-		    addCoordinatesToSolutionArray(next);
+		    //addCoordinatesToSolutionArray(next);
 
 			//my point class has a reference to previous points, so the solution will be determined from the final point
 
@@ -124,7 +148,7 @@ public class Maze{
 			//not solved, so add neighbors to Frontier and mark the floor with x.
 		    maze[next.getX()][next.getY()]='x';
 		    for(Point p : getNeighbors(next)){
-			rest.add(p);
+			    rest.add(p);
 		    }
 
 		}
