@@ -1,12 +1,15 @@
 import java.util.*;
+import java.io.*;
 
 public class MyDeque<T> {
 
   private T[] list;
+  private int[] p;
   private int head,tail,size;
 
   public MyDeque() {
     list = (T[]) new Object[10];
+    p = new int[10];
     head = 0;
     tail = 9;
     size = 0;
@@ -15,40 +18,39 @@ public class MyDeque<T> {
   public void resize(){
     if(size == list.length){
       T[] newlist = (T[]) new Object[size * 2];
+      int[] newp = new int[size * 2];
       for(int i = 0; i < size; i++){
         newlist[i] = list[(head + i) % size];
+        newp[i] = p[(head + i) % size];
       }
       list = newlist;
+      p = newp;
       head = 0;
       tail = size - 1;
-    }/*else if(size <= list.length/4){
-      T[] newlist = (T[]) new Object[size/2];
-      for(int i = 0; i < size; i++){
-        newlist[i] = list[(head + i) % size];
-      }
-      list = newlist;
-      head = 0;
-      tail = size - 1;
-    }*/
+    }
   }
 
-  public void addFirst(T item){
+  public void add(T item, int pr){
     resize();
-    head--;
-    if(head < 0){
-      head += list.length;
+
+    int temp = 0;
+    for(int i = head; i < p.length + head;i++){
+      if(pr > p[i % p.length]){
+        temp = i % p.length;
+        break;
+      }
     }
-    list[head] = item;
-    size += 1;
-  }
-  public void addLast(T item){
-    resize();
-    tail++;
-    if(tail != 0 && tail >= list.length){
-      tail -= list.length;
+    tail = (list.length + (tail + 1))%list.length;
+    int j = tail;
+    while(j > temp){
+      p[j] = p[j - 1];
+      list[j] = list[j - 1];
+      j--;
     }
-    list[tail] = item;
-    size += 1;
+    p[temp] = pr;
+    list[temp] = item;
+
+    size++;
   }
 
   public T removeFirst(){
@@ -58,7 +60,7 @@ public class MyDeque<T> {
     if(head != 0 && head >= list.length){
       head -= list.length;
     }
-    size -= 1;
+    size--;
     return val;
   }
   public T removeLast(){
@@ -68,8 +70,15 @@ public class MyDeque<T> {
     if(tail < 0){
       tail += list.length;
     }
-    size -= 1;
+    size--;
     return val;
+  }
+
+  public T removeSmallest(){
+    return removeFirst();
+  }
+  public T removeLargest(){
+    return removeLast();
   }
 
   public T getFirst(){
@@ -93,11 +102,11 @@ public class MyDeque<T> {
   public static void main(String[]args){
     MyDeque<Integer> D = new MyDeque<Integer>();
     for (int i = 1;i < 26;i++){
-      D.addFirst(i);
+      D.add(new Integer(26-i), i);
     }
     System.out.println(D.size());
     System.out.println(D.removeLast());
-    System.out.println(D.removeLast());
+    System.out.println(D.removeSmallest());
     System.out.println(D.size());
   }
 }
