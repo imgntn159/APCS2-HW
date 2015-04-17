@@ -112,19 +112,19 @@ public class Maze{
 		Point[] result = new Point[4];
 		int pos = 0;
 		if (!(maze[p.getX()+1][p.getY()] == '.' || maze[p.getX()+1][p.getY()] == '#')){
-			result[pos] = new Point(p.getX()+1,p.getY());
+			result[pos] = new Point(p.getX()+1,p.getY(),p);
 			pos++;
 		}
 		if (!(maze[p.getX()-1][p.getY()] == '.' || maze[p.getX()-1][p.getY()] == '#')){
-			result[pos] = new Point(p.getX()-1,p.getY());
+			result[pos] = new Point(p.getX()-1,p.getY(),p);
 			pos++;
 		}
 		if (!(maze[p.getX()][p.getY()+1] == '.' || maze[p.getX()][p.getY()+1] == '#')){
-			result[pos] = new Point(p.getX(),p.getY()+1);
+			result[pos] = new Point(p.getX(),p.getY()+1,p);
 			pos++;
 		}
 		if (!(maze[p.getX()][p.getY()-1] == '.' || maze[p.getX()][p.getY()-1] == '#')){
-			result[pos] = new Point(p.getX(),p.getY()-1);
+			result[pos] = new Point(p.getX(),p.getY()-1,p);
 			pos++;
 		}
 		return result;
@@ -151,7 +151,8 @@ public class Maze{
 			if(maze[next.getX()][next.getY()]=='E'){
 			//solved!
 				solved = true;
-			//addCoordinatesToSolutionArray(next);
+			    addCoordinatesToSolutionArray(next);
+			    System.out.println(toString());
 			}else{
 			//not solved, so add neighbors to Frontier and mark the floor with x.
 				maze[next.getX()][next.getY()]='.';
@@ -165,10 +166,23 @@ public class Maze{
 		}
 		return solved;
 	}
+	private void addCoordinatesToSolutionArray(Point p){
+	    Point temp = p;
+	    while(temp.getPrev() != null){
+	        //System.out.print(temp);
+	        maze[temp.getX()][temp.getY()] = 'o';
+	        temp = temp.getPrev();
+	    }
+	}
 
 	public static void main(String[]args){
-		Maze thing = new Maze("data1.dat");
-		System.out.println(thing.solveDFS(true));
+	    Maze thing;
+	    if (args.length < 1){
+		    thing = new Maze("data1.dat");
+	    }else{
+	        thing = new Maze(args[0]);
+	    }
+		System.out.println(thing.solveBFS(true));
 	}
 }
 
