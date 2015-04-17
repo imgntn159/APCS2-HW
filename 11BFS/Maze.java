@@ -16,6 +16,13 @@ public class Maze{
 	private String go(int x,int y){
 		return ("\033[" + x + ";" + y + "H");
 	}
+	public void wait(int millis){
+		try{
+	    Thread.sleep(millis);
+		}
+		catch(InterruptedException e){
+		}
+  }
 
 	/** Same constructor as before...*/
 	public Maze(String filename){
@@ -104,19 +111,19 @@ public class Maze{
 	public Point[] getNeighbors(Point p){
 		Point[] result = new Point[4];
 		int pos = 0;
-		if (maze[p.getX()+1][p.getY()] == ' '){
+		if (!(maze[p.getX()+1][p.getY()] == '.' || maze[p.getX()+1][p.getY()] == '#')){
 			result[pos] = new Point(p.getX()+1,p.getY());
 			pos++;
 		}
-		if (maze[p.getX()-1][p.getY()] == ' '){
+		if (!(maze[p.getX()-1][p.getY()] == '.' || maze[p.getX()-1][p.getY()] == '#')){
 			result[pos] = new Point(p.getX()-1,p.getY());
 			pos++;
 		}
-		if (maze[p.getX()][p.getY()+1] == ' '){
+		if (!(maze[p.getX()][p.getY()+1] == '.' || maze[p.getX()][p.getY()+1] == '#')){
 			result[pos] = new Point(p.getX(),p.getY()+1);
 			pos++;
 		}
-		if (maze[p.getX()][p.getY()-1] == ' '){
+		if (!(maze[p.getX()][p.getY()-1] == '.' || maze[p.getX()][p.getY()-1] == '#')){
 			result[pos] = new Point(p.getX(),p.getY()-1);
 			pos++;
 		}
@@ -133,12 +140,13 @@ public class Maze{
 		boolean solved = false;
 		while(!solved && rest.hasNext()){
 			if(animate && !solved){
+				wait(50);
 				System.out.println(toString(true));
 			}
 			//get the top
 			Point next = rest.remove();
-			System.out.println(next.getX());
-			System.out.println(next.getY());
+			//System.out.println(next.getX());
+			//System.out.println(next.getY());
 			//check if solved
 			if(maze[next.getX()][next.getY()]=='E'){
 			//solved!
@@ -148,7 +156,10 @@ public class Maze{
 			//not solved, so add neighbors to Frontier and mark the floor with x.
 				maze[next.getX()][next.getY()]='.';
 				for(Point p : getNeighbors(next)){
-					rest.add(p);
+					//System.out.println(p);
+					if(p!=null){
+						rest.add(p);
+					}
 				}
 			}
 		}
@@ -156,8 +167,8 @@ public class Maze{
 	}
 
 	public static void main(String[]args){
-		Maze thing = new Maze(args[0]);
-		System.out.println(thing.solveDFS());
+		Maze thing = new Maze("data1.dat");
+		System.out.println(thing.solveDFS(true));
 	}
 }
 

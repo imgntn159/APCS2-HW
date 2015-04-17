@@ -10,7 +10,7 @@ public class Frontier{
 		this.behavior = behavior;
 	}
 	public void add(Point item){
-		list.addFirst(item);
+		list.add(item,0);
 	}
 	public Point remove(){
 		if(behavior){

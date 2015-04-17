@@ -1,5 +1,5 @@
 public class Point{
-    public int x,y;
+    public int x,y,c;
     public Point(int x, int y){
         this.x = x;
         this.y = y;
@@ -9,5 +9,8 @@ public class Point{
     }
     public int getY(){
         return y;
+    }
+    public String toString(){
+        return "(" + x + "," + y + ")";
     }
 }
