@@ -3,7 +3,7 @@ import java.io.*;
 
 public class MyDeque<T> {
 
-  private T[] list;
+  public T[] list;
   private int[] p;
   private int head,tail,size;
 
@@ -100,16 +100,11 @@ public class MyDeque<T> {
   }
 
   public static void main(String[]args){
-    MyDeque<String> D = new MyDeque<String>();
-    D.add("Last", 1);
-    D.add("Biggest", 5);
-    D.add("Smallest", 0);
-    D.add("First", 1);
-    System.out.println(D.size());
+    MyDeque<Point> D = new MyDeque<Point>();
+    D.add(new Point(2,1),0);
+    D.add(new Point(1,2),0);
     System.out.println(D.removeFirst());
+    D.add(new Point(3,1),0);
     System.out.println(D.removeFirst());
-    System.out.println(D.removeFirst());
-    System.out.println(D.removeFirst());
-    System.out.println(D.size());
   }
 }
