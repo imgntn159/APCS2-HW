@@ -144,22 +144,25 @@ public class Maze{
 				System.out.println(toString(true));
 			}
 			//get the top
+			System.out.println(rest);
 			Point next = rest.remove();
-			//System.out.println(next.getX());
-			//System.out.println(next.getY());
+			//System.out.println(next);
 			//check if solved
 			if(maze[next.getX()][next.getY()]=='E'){
 			//solved!
 				solved = true;
-			    addCoordinatesToSolutionArray(next);
-			    System.out.println(toString());
+			  addCoordinatesToSolutionArray(next);
+			  System.out.println(toString());
 			}else{
-			//not solved, so add neighbors to Frontier and mark the floor with x.
+				//not solved
+				//System.out.println(rest);
 				maze[next.getX()][next.getY()]='.';
 				for(Point p : getNeighbors(next)){
-					//System.out.println(p);
 					if(p!=null){
+						//System.out.println(p);
 						rest.add(p);
+						//System.out.println(rest);
+						//System.out.println("---------");
 					}
 				}
 			}

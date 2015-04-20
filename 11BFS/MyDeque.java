@@ -100,13 +100,16 @@ public class MyDeque<T> {
   }
 
   public static void main(String[]args){
-    MyDeque<Integer> D = new MyDeque<Integer>();
-    for (int i = 1;i < 26;i++){
-      D.add(new Integer(26-i), i);
-    }
+    MyDeque<String> D = new MyDeque<String>();
+    D.add("Last", 1);
+    D.add("Biggest", 5);
+    D.add("Smallest", 0);
+    D.add("First", 1);
     System.out.println(D.size());
-    System.out.println(D.removeLast());
-    System.out.println(D.removeSmallest());
+    System.out.println(D.removeFirst());
+    System.out.println(D.removeFirst());
+    System.out.println(D.removeFirst());
+    System.out.println(D.removeFirst());
     System.out.println(D.size());
   }
 }
