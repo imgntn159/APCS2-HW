@@ -30,7 +30,7 @@ public class MyDeque<T> {
     int temp = p.get(0);
     int in = 0;
     for (int i = 0; i < list.size();i++){
-      if(p[i] < temp){
+      if(p.get(i) < temp){
         temp = p.get(i);
         in = i;
       }

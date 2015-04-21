@@ -204,6 +204,6 @@ public class Maze{
     }else{
         thing = new Maze(args[0]);
     }
-		System.out.println(thing.solveBest(true));
+		System.out.println(thing.solveDFS(true));
 	}
 }
