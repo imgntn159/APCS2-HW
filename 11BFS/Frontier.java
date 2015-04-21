@@ -21,7 +21,7 @@ public class Frontier{
 		}else if (behavior==1){//DFS
 			return list.removeFirst();
 		}else{//Best or AStar
-			return list.removeSmallest();
+			return list.removeLargest();
 		}
 	}
 	public static void main(String[]args){
