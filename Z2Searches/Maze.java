@@ -11,7 +11,7 @@ public class Maze{
 	private boolean behave;
 	private char[][]maze;
 	private int maxx,maxy;
-	private int startx,starty,endx,endy;
+	private int startx,starty;
 
 	private String go(int x,int y){
 		return ("\033[" + x + ";" + y + "H");
@@ -57,14 +57,6 @@ public class Maze{
 				starty = i/maxx;
 			}
 		}
-		for(int i=0;i<ans.length();i++){
-			char c = ans.charAt(i);
-			maze[i%maxx][i/maxx]= c;
-			if(c=='E'){
-				endx = i%maxx;
-				endy = i/maxx;
-			}
-		}
 	}
 
 	public String toString(){
@@ -93,17 +85,20 @@ public class Maze{
 		}
 	} //do the funky character codes when animate is true*/
 
+	/**Solve the maze using a frontier in a BFS manner. 
+	* When animate is true, print the board at each step of the algorithm.
+	* Replace spaces with x's as you traverse the maze. 
+	*/
 	public boolean solveBFS(boolean animate){
-		return solve1(animate,0);
+		return solve1(animate,true);
 	}
+
+	/**Solve the maze using a frontier in a DFS manner. 
+	* When animate is true, print the board at each step of the algorithm.
+	* Replace spaces with x's as you traverse the maze. 
+	*/
 	public boolean solveDFS(boolean animate){
-		return solve1(animate,1);	
-	}
-	public boolean solveBest(boolean animate){
-		return solve1(animate,2);	
-	}
-	public boolean solveAStar(boolean animate){
-		return solve1(animate,3);	
+		return solve1(animate,false);	
 	}
 
 	public boolean solveBFS(){
@@ -112,39 +107,33 @@ public class Maze{
 	public boolean solveDFS(){
 		return solveDFS(false);
 	}
-	public boolean solveBest(){
-		return solveBest(false);
-	}
-	public boolean solveAStar(){
-		return solveBest(false);
-	}
 
 	public Point[] getNeighbors(Point p){
 		Point[] result = new Point[4];
 		int pos = 0;
 		if (!(maze[p.getX()+1][p.getY()] == '.' || maze[p.getX()+1][p.getY()] == '#')){
-			result[pos] = new Point(p.getX()+1,p.getY(),p.getC()+1,p);
+			result[pos] = new Point(p.getX()+1,p.getY(),p);
 			pos++;
 		}
 		if (!(maze[p.getX()-1][p.getY()] == '.' || maze[p.getX()-1][p.getY()] == '#')){
-			result[pos] = new Point(p.getX()-1,p.getY(),p.getC()+1,p);
+			result[pos] = new Point(p.getX()-1,p.getY(),p);
 			pos++;
 		}
 		if (!(maze[p.getX()][p.getY()+1] == '.' || maze[p.getX()][p.getY()+1] == '#')){
-			result[pos] = new Point(p.getX(),p.getY()+1,p.getC()+1,p);
+			result[pos] = new Point(p.getX(),p.getY()+1,p);
 			pos++;
 		}
 		if (!(maze[p.getX()][p.getY()-1] == '.' || maze[p.getX()][p.getY()-1] == '#')){
-			result[pos] = new Point(p.getX(),p.getY()-1,p.getC()+1,p);
+			result[pos] = new Point(p.getX(),p.getY()-1,p);
 			pos++;
 		}
 		return result;
 
 	}
 
-	private boolean solve1(boolean animate, int mode){
-		Frontier rest = new Frontier(mode); //0 BFS, 1 DFS, 2 Best, 3 AStar
-		Point start = new Point(startx,starty,0);
+	private boolean solve1(boolean animate, boolean mode){
+		Frontier rest = new Frontier(mode); //true then q
+		Point start = new Point(startx,starty);
 
 		rest.add(start);//put the start into the Frontier 
 
@@ -156,6 +145,8 @@ public class Maze{
 			}
 			//get the top
 			Point next = rest.remove();
+			System.out.println("---");
+			System.out.println(rest.size());
 			//check if solved
 			if(maze[next.getX()][next.getY()]=='E'){
 			//solved!
@@ -167,43 +158,30 @@ public class Maze{
 				maze[next.getX()][next.getY()]='.';
 				for(Point p : getNeighbors(next)){
 					if(p!=null){
-						if(mode == 2){
-							rest.add(p,getDistance(p));
-						}else if(mode == 3){
-							rest.add(p,getDistance(p)+p.getC());
-						}else{
-							rest.add(p);
-						}
+						System.out.println(p);
+						rest.add(p);
 					}
 				}
 			}
 		}
 		return solved;
 	}
-	private int getDistance(Point p){
-		return Math.abs(p.getX()-endx) + Math.abs(p.getY()-endy);
-	}
 	private void addCoordinatesToSolutionArray(Point p){
 	    Point temp = p;
-	    ArrayList<Point> list = new ArrayList<Point>();
 	    while(temp.getPrev() != null){
-	    	  list.add(temp);
+	        //System.out.print(temp);
 	        maze[temp.getX()][temp.getY()] = 'o';
 	        temp = temp.getPrev();
-	    }
-	    System.out.println();
-	    for(Point thing : list){
-	    	System.out.print(thing + "=>");
 	    }
 	}
 
 	public static void main(String[]args){
-    Maze thing;
-    if (args.length < 1){
-	    thing = new Maze("data1.dat");
-    }else{
-        thing = new Maze(args[0]);
-    }
-		System.out.println(thing.solveBest(true));
+	    Maze thing;
+	    if (args.length < 1){
+		    thing = new Maze("data1.dat");
+	    }else{
+	        thing = new Maze(args[0]);
+	    }
+		System.out.println(thing.solveDFS());
 	}
 }

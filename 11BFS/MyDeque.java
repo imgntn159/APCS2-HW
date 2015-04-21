@@ -3,108 +3,72 @@ import java.io.*;
 
 public class MyDeque<T> {
 
-  public T[] list;
-  private int[] p;
+  private ArrayList<T> list;
+  private ArrayList<Integer> p;
   private int head,tail,size;
 
   public MyDeque() {
-    list = (T[]) new Object[10];
-    p = new int[10];
-    head = 0;
-    tail = 9;
-    size = 0;
-  }
-
-  public void resize(){
-    if(size == list.length){
-      T[] newlist = (T[]) new Object[size * 2];
-      int[] newp = new int[size * 2];
-      for(int i = 0; i < size; i++){
-        newlist[i] = list[(head + i) % size];
-        newp[i] = p[(head + i) % size];
-      }
-      list = newlist;
-      p = newp;
-      head = 0;
-      tail = size - 1;
-    }
+    list = new ArrayList<T>();
+    p = new ArrayList<Integer>();
   }
 
   public void add(T item, int pr){
-    resize();
-
-    int temp = 0;
-    for(int i = head; i < p.length + head;i++){
-      if(pr > p[i % p.length]){
-        temp = i % p.length;
-        break;
-      }
-    }
-    tail = (list.length + (tail + 1))%list.length;
-    int j = tail;
-    while(j > temp){
-      p[j] = p[j - 1];
-      list[j] = list[j - 1];
-      j--;
-    }
-    p[temp] = pr;
-    list[temp] = item;
-
-    size++;
+    list.add(item);
+    p.add(pr);
   }
 
-  public T removeFirst(){
-    T val = list[head];
-    list[head] = null;
-    head++;
-    if(head != 0 && head >= list.length){
-      head -= list.length;
-    }
-    size--;
-    return val;
-  }
   public T removeLast(){
-    T val = list[tail];
-    list[tail] = null;
-    tail--;
-    if(tail < 0){
-      tail += list.length;
-    }
-    size--;
-    return val;
+    p.remove(0);
+    return list.remove(0);
+  }
+  public T removeFirst(){
+    p.remove(list.size() - 1);
+    return list.remove(list.size() - 1);
   }
 
   public T removeSmallest(){
-    return removeFirst();
+    int temp = p.get(0);
+    int in = 0;
+    for (int i = 0; i < list.size();i++){
+      if(p[i] < temp){
+        temp = p.get(i);
+        in = i;
+      }
+    }
+    p.remove(in);
+    return list.remove(in);
   }
   public T removeLargest(){
-    return removeLast();
+    int temp = p.get(0);
+    int in = 0;
+    for (int i = 0; i < list.size();i++){
+      if(i > temp){
+        temp = p.get(i);
+        in = i;
+      }
+    }
+    p.remove(in);
+    return list.remove(in);
   }
 
   public T getFirst(){
-    if (size == 0) {
-      throw new NoSuchElementException();
-    }
-    return list[head];
+    return list.get(0);
   }
 
   public T getLast(){
-    if (size == 0) {
-      throw new NoSuchElementException();
-    }
-    return list[tail];
+    return list.get(list.size() - 1);
   }
 
   public int size(){
-    return size;
+    return list.size();
   }
 
   public static void main(String[]args){
     MyDeque<Point> D = new MyDeque<Point>();
-    D.add(new Point(2,1),0);
-    D.add(new Point(1,2),0);
-    System.out.println(D.removeFirst());
-    D.add(new Point(3,1),0);
+    D.add(new Point(2,1,0),0);
+    D.add(new Point(1,2,0),1);
+    System.out.println(D.removeSmallest());
+    D.add(new Point(3,1,0),0);
     System.out.println(D.removeFirst());
   }
 }
