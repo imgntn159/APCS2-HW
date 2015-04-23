@@ -26,10 +26,16 @@ public class Tree<T>{
 
 
     public int getHeight(){
-	return getHeight(root);
+	return getHeight(root,0);//Just the root means height==0
     }
-    public int getHeight(TreeNode<T> node){
-	return -1;
+    public int getHeight(TreeNode<T> node,int count){
+	if(!(node.hasLeft()) && !(node.hasRight())){
+	    return count;
+	}else if(getHeight(node.getLeft(),count+1) > getHeight(node.getRight(),count+1)){
+	    return getHeight(node.getLeft(),count+1);
+	}else{
+	    return getHeight(node.getRight(),count+1);
+	}
     }
     public String toString(){
 	return "dummy string";
