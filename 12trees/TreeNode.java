@@ -1,7 +1,7 @@
 public class TreeNode<T>{
 	private T data;
-	private TreeNode<T> left = new TreeNode<T>();
-	private TreeNode<T> right = new TreeNode<T>();
+	private TreeNode<T> left = null;
+	private TreeNode<T> right = null;
 	
 	public TreeNode(){
 		data = null;
@@ -12,6 +12,9 @@ public class TreeNode<T>{
 
 	public T getData(){
 		return data;
+	}
+	public boolean hasData(){
+		return data != null;
 	}
 	public TreeNode<T>  getLeft(){
 		return left;
@@ -31,10 +34,18 @@ public class TreeNode<T>{
 		data = item;
 	}
 	public void setLeft(T item){
-		left.setData(item);
+		if(hasLeft()){
+			left.setData(item);
+		}else{
+			left = new TreeNode<T>(item);
+		}
 	}
 	public void setRight(T item){
-		right.setData(item);
+		if(hasRight()){
+			right.setData(item);
+		}else{
+			right = new TreeNode<T>(item);
+		}
 	}
 
 	public String toString(){
