@@ -13,10 +13,10 @@ public class TreeNode<T>{
 	public T getData(){
 		return data;
 	}
-	public T getLeft(){
+	public TreeNode<T>  getLeft(){
 		return left;
 	}
-	public T getRight(){
+	public TreeNode<T>  getRight(){
 		return right;
 	}
 
