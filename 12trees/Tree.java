@@ -45,7 +45,7 @@ public class Tree<T>{
 	}
 	private String getLevel(TreeNode<T> curr, int level, int currLevel){
 		String result = "";
-		if(level > currLevel){
+		if(level < currLevel){
 			System.out.println("WHAT ARE YOU DOING FOOL");
 			return "";
 		}
