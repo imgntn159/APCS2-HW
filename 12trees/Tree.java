@@ -81,7 +81,7 @@ public class Tree<T>{
   		return postOrder(root);
   	}
   }
-   private String preOrder(TreeNode<T> node){
+  private String preOrder(TreeNode<T> node){
   	String result = "";
 		result+=node.getData()+",";
   	if(node.hasLeft()){
@@ -123,6 +123,8 @@ public class Tree<T>{
   	thing.add(3);
   	thing.add(4);
   	thing.add(5);
-  	System.out.println(thing);
+  	thing.add(6);
+  	thing.add(7);
+  	System.out.println(thing.traverse(1));
   }
 }
