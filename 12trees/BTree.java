@@ -1,10 +1,10 @@
 import java.util.*;
 import java.io.*;
 
-public class Tree<T>{
+public class BTree<T>{
     private TreeNode<T> root = new TreeNode<T>();
     private Random rand = new Random(1);
-    public Tree(){
+    public BTree(){
 	return;
     }
     public void add(T item){
@@ -141,7 +141,7 @@ public class Tree<T>{
 
     /*MAIN FUNCTION*/
     public static void main(String[]args){
-  	Tree<Integer> thing = new Tree<Integer>();
+  	BTree<Integer> thing = new BTree<Integer>();
   	thing.add(1);
   	thing.add(2);
   	thing.add(3);
