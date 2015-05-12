@@ -1,28 +1,55 @@
 public class MyHeap{
 	private boolean isMax;
-	private HeapNode root;
+	private int[] array;
 	public MyHeap(){
 		isMax = true;
+		array = new int[10];
 	}
 	public MyHead(boolean thing){
 		isMax = thing;
+		array = new int[10];
 	}
 	public String toString(){
-		return "hi!";
+		String result = "";
+		for(int i : array){
+			result += Integer.toString(i) + " ";
+		}
+		return result;
+	}
+	private void resize(){
+		int[] temp = new int[array.length * 2];
+		System.arraycopy(array,0,temp,0,array.length);
+		array = temp;
 	}
 	public int remove(){
-		return 1;
+		int temp = array[1];
+		reorder(1);
+		array[0] -= 1;
+		return temp;
 	}
 	public void add(int val){
-		add(val, root);
-	}
-	private void add(int val, HeapNode node){
-		if(valChecker(val,node.getData())){
-			if(node.hasNoChildren()){
-				node.setLeft(new HeapNode(val,node));
-			}else{
-				node.setRight(new HeapNode(val,node));
+		int index = 0;
+		boolean full = false;
+		for(int i = 1;i<array.length;i++){
+			if(array[i] == null){
+				array[i] = val;
+				index = i;
+				break;
+			}else if(i == array.length -1){
+				full = true;
+				index = i;
 			}
+		}
+		if(full){resize(); array[index] = val;}
+		reorder(index);
+		array[0] += 1;
+	}
+	private void reorder(int i){
+		
+	}
+	private void add(int val, int index){
+		if(array[index] == null){
+			array[index] = val;
 		}
 	}
 	private boolean valChecker(int a, int b){
@@ -33,6 +60,9 @@ public class MyHeap{
 		}
 	}
 	public int peek(){
-		return 1;
+		if(array[1] == null){
+			return 0;
+		}
+		return array[1];
 	}
 }
