@@ -1,27 +1,32 @@
 import java.io.*;
 import java.util.*;
 
-public class heapNode {
+public class HeapNode {
 
     private int data;
-    private heapNode left,right,parent;
+    private HeapNode left,right,parent;
 
-    public heapNode(int d) {
+    public HeapNode(int d) {
     	data = d;
     	left = right = parent = null;
     }
+    public HeapNode(int d, HeapNode p){
+        data = d;
+        parent = p;
+        left = right = null;
+    }
     
     //accessors
-    public T getData() {
+    public int getData() {
 	   return data;
     }
-    public heapNode getLeft() {
+    public HeapNode getLeft() {
 	   return left;
     }
-    public heapNode getRight() {
+    public HeapNode getRight() {
 	   return right;
     }
-    public heapNode getParent() {
+    public HeapNode getParent() {
        return parent;
     }
 
@@ -29,13 +34,13 @@ public class heapNode {
     public void setData(int d) {
 	   data = d;
     }
-    public void setLeft(heapNode l) {
+    public void setLeft(HeapNode l) {
 	   left = l;
     }
-    public void setRight(heapNode r) {
+    public void setRight(HeapNode r) {
 	   right = r;
     }
-    public void setParent(heapNode p) {
+    public void setParent(HeapNode p) {
        parent = p;
     }
 
