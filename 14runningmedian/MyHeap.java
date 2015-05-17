@@ -104,6 +104,9 @@ public class MyHeap{
 		}
 		return array[1];
 	}
+	public int size(){
+		return array[0];
+	}
 	public static void main(String[]args){
 		MyHeap h = new MyHeap();
 		h.add(1);

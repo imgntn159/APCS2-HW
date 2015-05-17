@@ -43,11 +43,15 @@ public class RunningMedian{
 		}
 	}
 	public String toString(){
-		return left + " " + right;
+		return left + "\n " + right;
 	}
 
 	public static void main(String[]args){
 		RunningMedian thing = new RunningMedian();
+		thing.add(1);
+		thing.add(15);
+		thing.add(27);
+		thing.add(98);
 		System.out.println(thing);
 		System.out.println(thing.getmedian());
 	}
