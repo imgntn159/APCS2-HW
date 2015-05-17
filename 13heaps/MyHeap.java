@@ -12,7 +12,11 @@ public class MyHeap{
 	public String toString(){
 		String result = "";
 		for(int i : array){
-			result += Integer.toString(i) + " ";
+			if(i == 0){
+				result += " " + " ";
+			}else{
+				result += Integer.toString(i) + " ";
+			}
 		}
 		return result;
 	}
@@ -24,11 +28,11 @@ public class MyHeap{
 	public int remove(){
 		int index = 1;
 		int temp = array[1];
-		array[1] = null;
+		array[1] = 0;
 		for(int i = 2;i<array.length;i++){
 			if(i == array.length - 1){
 				index = i;
-			}else if(array[i] == null){
+			}else if(array[i] == 0){
 				index = i-1;
 			}
 		}
@@ -54,7 +58,7 @@ public class MyHeap{
 		int index = 0;
 		boolean full = false;
 		for(int i = 1;i<array.length;i++){
-			if(array[i] == null){
+			if(array[i] == 0){
 				array[i] = val;
 				index = i;
 				break;
@@ -67,7 +71,7 @@ public class MyHeap{
 		addh(index);
 		array[0]++;
 	}
-	private void addh(int i){
+	private void addh(int index){
 		int parent = 1;
 		if(index%2 == 0){
 			parent = index/2;
@@ -89,9 +93,20 @@ public class MyHeap{
 		}
 	}
 	public int peek(){
-		if(array[1] == null){
+		if(array[1] == 0){
 			return 0;
 		}
 		return array[1];
+	}
+	public static void main(String[]args){
+		MyHeap h = new MyHeap();
+		//h.add(4);
+		h.add(3);
+		h.add(2);
+		h.add(1);
+		System.out.println(h);
+		//System.out.println(h.peek());
+		//System.out.println(h.remove());
+		//System.out.println(h);
 	}
 }
