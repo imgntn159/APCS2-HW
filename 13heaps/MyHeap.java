@@ -1,3 +1,6 @@
+import java.io.*;
+import java.util.*;
+
 public class MyHeap{
 	private boolean isMax;
 	private int[] array;
@@ -73,6 +76,9 @@ public class MyHeap{
 	}
 	private void addh(int index){
 		int parent = 1;
+		if(index == 1){
+			return;
+		}
 		if(index%2 == 0){
 			parent = index/2;
 		}else{
@@ -87,23 +93,23 @@ public class MyHeap{
 	}
 	private boolean valChecker(int a, int b){
 		if(isMax){
-			return a<b;
-		}else{
 			return b<a;
+		}else{
+			return a<b;
 		}
 	}
 	public int peek(){
 		if(array[1] == 0){
-			return 0;
+			throw new NoSuchElementException();
 		}
 		return array[1];
 	}
 	public static void main(String[]args){
 		MyHeap h = new MyHeap();
-		//h.add(4);
-		h.add(3);
-		h.add(2);
 		h.add(1);
+		h.add(2);
+		h.add(3);
+		h.add(4);
 		System.out.println(h);
 		//System.out.println(h.peek());
 		//System.out.println(h.remove());
