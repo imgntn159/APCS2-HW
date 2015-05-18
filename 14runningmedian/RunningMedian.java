@@ -43,7 +43,7 @@ public class RunningMedian{
 		}
 	}
 	public String toString(){
-		return left + "\n " + right;
+		return left + "\n" + right;
 	}
 
 	public static void main(String[]args){

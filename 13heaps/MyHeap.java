@@ -39,16 +39,18 @@ public class MyHeap{
 				index = i-1;
 			}
 		}
+		int[] tempar = new int[array.length];
+		tempar[0] = array[0];
+		System.arraycopy(array,2,tempar,1,array.length-2);
+		array = tempar;
 		removeh(index);
 		array[0]--;
 		return temp;
 	}
 	private void removeh(int index){
-		int parent = 1;
-		if(index%2 == 0){
-			parent = index/2;
-		}else{
-			parent = (index-1)/2;
+		int parent = index/2;
+		if(index == array.length-1){
+			return;
 		}
 		if(valChecker(array[index],array[parent])){
 			int temp = array[index];
@@ -104,17 +106,19 @@ public class MyHeap{
 		}
 		return array[1];
 	}
+	public int size(){
+		return array[0];
+	}
 	public static void main(String[]args){
 		MyHeap h = new MyHeap();
-		h.add(1);
 		h.add(2);
-		h.add(3);
-		h.add(4);
+		h.add(7);
+		h.add(6);
+		h.add(5);
+		h.add(9);
 		System.out.println(h);
+		System.out.println(h.peek());
 		System.out.println(h.remove());
 		System.out.println(h);
-		//System.out.println(h.peek());
-		//System.out.println(h.remove());
-		//System.out.println(h);
 	}
 }
